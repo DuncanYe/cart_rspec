@@ -69,6 +69,15 @@ RSpec.describe Cart, type: :model do
       end
     end
 
+    it "可以把 Session 內容(Hash 格式)，還原成購物車內容" do
+      cart = Cart.from_hash(session_hash)
+
+      expect(cart.items.first.product_id).to be 2
+      expect(cart.items.first.quantity).to be 3
+      expect(cart.items.second.product_id).to be 3
+      expect(cart.items.second.quantity).to be 4
+    end
+
     private
 
     def session_hash
@@ -78,7 +87,6 @@ RSpec.describe Cart, type: :model do
           {"product_id" => 3, "quantity" => 4}
         ]
       }
-      
     end
 
   end
