@@ -73,7 +73,7 @@ RSpec.describe Cart, type: :model do
 
     def session_hash
       {
-        "item" => [
+        "items" => [
           {"product_id" => 2, "quantity" => 3},
           {"product_id" => 3, "quantity" => 4}
         ]
