@@ -28,8 +28,9 @@ RSpec.describe Cart, type: :model do
       4.times { cart.add_item(p1.id) }
       3.times { cart.add_item(p2.id) }
 
-      expect(cart.items.first.title).to eq "拉拉鍊"
-      expect(cart.items.second.product_id).to eq p2.id
+      expect(cart.items.first.product.title).to eq "拉拉鍊"
+      expect(cart.items.first.quantity).to eq 4
+      expect(cart.items.second.product_id).to be p2.id
       expect(cart.items.first.product).to be_a Product
     end
 
