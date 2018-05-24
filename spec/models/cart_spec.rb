@@ -46,5 +46,19 @@ RSpec.describe Cart, type: :model do
       expect(cart.items.second.price).to be 600
     end
 
+    it "購物車計算自己的總額" do
+      cart = Cart.new
+      p1 = Product.create(title:"手錶", price: 50)
+      p2 = Product.create(title:"鹹酥雞", price: 100)
+
+      3.times {
+        cart.add_item(p1)
+        cart.add_item(p2)
+            # 這裡傳只寫p1或數字也都可以？有傳什麼比較好嗎？
+      }
+
+      expect(cart.total_price).to be 450
+    end
+
   end
 end
