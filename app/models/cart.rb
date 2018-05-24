@@ -2,8 +2,8 @@ class Cart
   attr_reader :items
   # 把@items 實例變數，做成可讀取的簡寫方法
 
-  def initialize
-    @items = []
+  def initialize(items = [])
+    @items = items
   end
 
   def add_item(id)
@@ -32,6 +32,16 @@ class Cart
     }
 
     { "items" => all_items }
+  end
+
+  def self.from_hash(hash)
+    if hash.nil?
+      new[]
+    else
+      new hash["items"].map { |item_hash|
+        CartItem.new(item_hash["product_id"], item_hash["quantity"])
+       }
+    end
   end
 
 end
