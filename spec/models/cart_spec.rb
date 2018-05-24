@@ -56,8 +56,29 @@ RSpec.describe Cart, type: :model do
         cart.add_item(p2)
             # 這裡傳只寫p1或數字也都可以？有傳什麼比較好嗎？
       }
-
       expect(cart.total_price).to be 450
+    end
+
+    describe "購物車進階功能" do
+      it "將購物車內容轉成 Hash ，存到 Session 裡" do
+        cart = Cart.new
+        3.times { cart.add_item(2) }
+        4.times { cart.add_item(3) }
+
+        expect(cart.serialize).to eq session_hash
+      end
+    end
+
+    private
+
+    def session_hash
+      {
+        "item" => [
+          {"product_id" => 2, "quantity" => 3},
+          {"product_id" => 3, "quantity" => 4}
+        ]
+      }
+      
     end
 
   end
